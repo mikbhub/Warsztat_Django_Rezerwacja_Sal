@@ -86,7 +86,7 @@ def room_list(request):
     <br>
     <a href="/add_room"><input type="button" value="Dodaj salę"/></a>
     </body></html>
-    """.format(table=table, search=reverse('search:search-results'))
+    """.format(table=table, search=reverse('search:make-search'))
     return HttpResponse(response)
 
 
