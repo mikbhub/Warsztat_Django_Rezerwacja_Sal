@@ -18,8 +18,8 @@ class SearchAvaliableAuditoriums(BaseView):
     @csrf_exempt
     def get(self, request):
 
-        auditoriums = Auditorium.objects.all()
-        auditoriums_flat = [x for y in [(auditorium.pk, auditorium.name) for auditorium in auditoriums] for x in y]
+        # auditoriums = Auditorium.objects.all()
+        # auditoriums_flat = [x for y in [(auditorium.pk, auditorium.name) for auditorium in auditoriums] for x in y]
 
         form_action = reverse('search-results')
 
@@ -41,10 +41,7 @@ class SearchAvaliableAuditoriums(BaseView):
                 </form>
             </body>
         </html>
-        """.format(
-            ''.join('<option value="{}">{}</option>' for _ in auditoriums).format(*auditoriums_flat),
-                form_action=form_action,
-            )
+        """.format(form_action=form_action,)
         return HttpResponse(html_form)
 
 
