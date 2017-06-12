@@ -1,6 +1,6 @@
 from django.db import IntegrityError
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from rezerwacje.models import Auditorium, Reservation
 from django.utils.timezone import datetime
 
@@ -78,15 +78,15 @@ def room_list(request):
     response = """
     <html><body>
     <br>
-    <a href="/search/make-search"><input type="button" value="Przejdź do wyszukiwarki"/></a><br>
+    <a href="{search}"><input type="button" value="Przejdź do wyszukiwarki"/></a><br>
     <br>
     <table border = 1px>
-    {}
+    {table}
     </table>
     <br>
     <a href="/add_room"><input type="button" value="Dodaj salę"/></a>
     </body></html>
-    """.format(table)
+    """.format(table=table, search=reverse('search:search-results'))
     return HttpResponse(response)
 
 
