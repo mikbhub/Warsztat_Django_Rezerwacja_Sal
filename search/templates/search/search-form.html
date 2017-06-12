@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wyszukiwarka audytoriów</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker({
+        dateFormat: "yy-mm-dd"
+    });
+  } );
+  </script>
+</head>
+<body>
+    <form action="{% url 'search:search-results' %}" method="GET">
+    {% csrf_token %}
+        <label>Auditorium capacity
+            <input type="number" min=0 name="capacity">
+        </label><br>
+        <label>Date
+            <input type="date" name="date" id="datepicker">
+        </label><br>
+        <label>Projector:<br>
+            <input type="radio" name="projector" value="True">Available<br>
+            <input type="radio" name="projector" value="False">Not available<br>
+        </label><br>
+        <input type="submit" value="Search available auditoriums"/>
+    </form>
+</body>
+</html>
