@@ -21,7 +21,7 @@ class SearchAvaliableAuditoriums(BaseView):
         # auditoriums = Auditorium.objects.all()
         # auditoriums_flat = [x for y in [(auditorium.pk, auditorium.name) for auditorium in auditoriums] for x in y]
 
-        form_action = reverse('search-results')
+        form_action = reverse('search:search-results')
 
         html_form = """
         <html>
