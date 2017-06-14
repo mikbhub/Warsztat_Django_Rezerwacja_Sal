@@ -1,33 +1,61 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Wyszukiwarka audytoriów</title>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-  $( function() {
-    $( "#datepicker" ).datepicker({
-        dateFormat: "yy-mm-dd"
-    });
-  } );
-  </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wyszukiwarka audytoriów</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script>
+        $(function() {
+            $("#datepicker").datepicker({
+                dateFormat: "yy-mm-dd"
+            });
+            $('#range').on("change", function() {
+                $('.output').val(this.value);
+            }).trigger("change");
+        });
+    </script>
 </head>
 <body>
-    <form action="{% url 'search:search-results' %}" method="GET">
-        <label>Auditorium capacity
-            <input type="number" min=0 name="capacity">
-        </label><br>
-        <label>Date
-            <input type="date" name="date" id="datepicker">
-        </label><br>
-        <label>Projector:<br>
-            <input type="radio" name="projector" value="True">Available<br>
-            <input type="radio" name="projector" value="False">Not available<br>
-        </label><br>
-        <input type="submit" value="Search available auditoriums"/>
-    </form>
+    <div class="container-fluid">
+    <div class="row justify-content-center">
+    <div class="col-sm-12">
+        <form action="{% url 'search:search-results' %}" method="GET">
+            <label class="center-block text-center"><h2>Required Auditorium capacity:
+                <output for="range" class="output h2" style="display: inline;"></output> persons</h2>
+                <input type="range" min="1" max="1000" name="capacity" id="range" value=666>
+            </label><br>
+            <label class="center-block h2 text-center">Date
+                <input type="date" name="date" id="datepicker">
+            </label><br>
+            <label class="center-block h2 text-center">Projector:<br>
+                <div class="btn-group btn-group-justified" data-toggle="buttons">
+                    <label class="btn btn-primary btn-lg">
+                        <input type="radio" name="projector" value="True">Available
+                    </label>
+                    <label class="btn btn-primary btn-lg">
+                        <input type="radio" name="projector" value="False">Not available
+                    </label>
+                </div>
+            </label><br>
+            <button type="submit" class="btn btn-success btn-lg btn-block">Search available auditoriums</button>
+        </form>
+    </div>
+    </div>
+    </div>
 </body>
 </html>
